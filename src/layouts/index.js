@@ -1,15 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 import Header from '../components/Header/'
 import './index.css'
 
 const LayoutContainer = styled.div`
-    margin: 0 auto;
-    max-width: 960px;
-    padding: 0 1.0875rem 1.45rem;
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 0 1.0875rem 1.45rem;
 `
 
 const Layout = ({ children, data }) => (
@@ -22,9 +22,7 @@ const Layout = ({ children, data }) => (
       ]}
     />
     <Header data={data} siteTitle={data.site.siteMetadata.title} />
-    <LayoutContainer>
-      {children()}
-    </LayoutContainer>
+    <LayoutContainer>{children()}</LayoutContainer>
   </div>
 )
 
@@ -40,6 +38,11 @@ export const query = graphql`
       siteMetadata {
         title
         desc
+      }
+    }
+    background: imageSharp(id: { regex: "/bg.jpeg/" }) {
+      sizes(maxWidth: 1240) {
+        ...GatsbyImageSharpSizes
       }
     }
   }

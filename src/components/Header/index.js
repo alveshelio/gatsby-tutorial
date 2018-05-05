@@ -1,10 +1,14 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components';
+import Img from 'gatsby-image'
 
 import logo from '../../images/logo.svg';
 
 const HeaderWrapper = styled.div`
+    height: 70vh;
+    overflow: hidden;
+    position: relative;
     background: #524763;
     margin-bottom: 1.45rem;
     
@@ -19,6 +23,8 @@ const HeaderContainer = styled.div`
     margin: 0 auto;
     max-width: 960px;
     padding: 1.45rem 1.0875rem;
+    position: relative;
+    z-index: 2;
 `;
 
 const Navigation = styled.nav`
@@ -45,8 +51,6 @@ const Header = ({ data }) => (
           <img src={logo} alt='Level Up Tuts' />
         </Link>
       </h1>
-      <p>{data.site.siteMetadata.desc}</p>
-      <p>{data.site.siteMetadata.title}</p>
       <Navigation>
         <ul>
           <li><Link to='/'>Home</Link></li>
@@ -54,6 +58,16 @@ const Header = ({ data }) => (
         </ul>
       </Navigation>
     </HeaderContainer>
+    <Img
+      style={{
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: '100%',
+        height: '100%',
+      }}
+      sizes={data.background.sizes} src={data.background.src}
+    />
   </HeaderWrapper>
 )
 
