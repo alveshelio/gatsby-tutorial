@@ -6,7 +6,7 @@ import PostListing from '../components/Posts/PostListing'
 const IndexPage = ({ data }) => (
   <div>
     <h2>Posts</h2>
-    {data.post.edges.map(({ node }) => <PostListing key={node.time} post={node} />)}
+    {data.post.edges.map(({ node }) => <PostListing key={node.id} post={node} />)}
   </div>
 )
 
@@ -23,6 +23,7 @@ export const query = graphql`
     post: allMarkdownRemark {
       edges {
         node {
+          id
           timeToRead
           frontmatter {
             title
