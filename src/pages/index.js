@@ -1,14 +1,12 @@
-import React from 'react'
+import React, { Fragment} from 'react'
 import Link from 'gatsby-link'
+
+import PostListing from '../components/Posts/PostListing'
 
 const IndexPage = ({ data }) => (
   <div>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <p>{data.site.siteMetadata.title}</p>
-    <p>{data.site.siteMetadata.desc}</p>
-    <Link to="/page-2/">Go to page 2</Link>
+    <h2>Posts</h2>
+    {data.post.edges.map(({ node }) => <PostListing key={node.time} post={node} />)}
   </div>
 )
 
@@ -20,6 +18,19 @@ export const query = graphql`
       siteMetadata {
         title
         desc
+      }
+    }
+    post: allMarkdownRemark {
+      edges {
+        node {
+          timeToRead
+          frontmatter {
+            title
+            date(fromNow:false, formatString:"MMM DD YYYY")
+          }
+          html
+          excerpt
+        }
       }
     }
   }
